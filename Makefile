@@ -1,5 +1,10 @@
-CFLAGS = -std=c99 -Wall -O2
+DEBUG_FLAG__ = 
+DEBUG_FLAG_1_ = -ggdb
+DEBUG_FLAG = $(DEBUG_FLAG_$(DEBUG)_)
+CFLAGS = -std=c99 -Wall -Werror -Wpedantic -O2 $(DEBUG_FLAG)
 PREFIX = /usr/local
+
+all: lazyk
 
 lazyk: lazyk.c
 	$(CC) $(CFLAGS) -o $@ $<
@@ -17,4 +22,4 @@ uninstall:
 clean:
 	rm -f lazyk
 
-.PHONY: test install uninstall clean
+.PHONY: all test install uninstall clean
