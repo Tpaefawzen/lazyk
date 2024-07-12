@@ -84,7 +84,7 @@ typedef struct tagPair {
 #define COPIED		mkimm(1)
 #define UNUSED_MARKER	mkimm(2)
 
-Pair *og_heap_area, *og_free_area, *heap_area, *free_ptr;
+Pair *og_heap_area, *heap_area, *free_ptr;
 int heap_size, next_heap_size;
 
 double total_gc_time = 0.0;
@@ -120,8 +120,6 @@ void storage_finally(void)
 {
     free(og_heap_area);
     og_heap_area = NULL;
-    free(og_free_area);
-    og_free_area = NULL;
 }
 
 Cell pair(Cell fst, Cell snd)
@@ -164,9 +162,6 @@ void gc_run(Cell *save1, Cell *save2)
                     next_heap_size);
     }
 
-    if ( og_free_area == NULL )
-        og_free_area = free_area;
-
     free_ptr = scan = free_area;
     free_area = heap_area - heap_size;
     heap_area = free_ptr + next_heap_size;
@@ -189,6 +184,7 @@ void gc_run(Cell *save1, Cell *save2)
 
     if (heap_size != next_heap_size || num_alive * 8 > next_heap_size) {
         heap_size = next_heap_size;
+        og_heap_area = heap_area - heap_size;
         if (num_alive * 8 > next_heap_size)
             next_heap_size = num_alive * 8;
 
