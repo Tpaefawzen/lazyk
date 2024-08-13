@@ -2,7 +2,7 @@
 .\"
 .\" This manual is under the MIT License.
 .\"
-.Dd July 7, 2024
+.Dd August 13, 2024
 .Dt LAZYK 1
 .Os
 .Sh NAME
@@ -109,13 +109,13 @@ end your program.
 This error can happen during outputting;
 the interpreter was trying to convert each Church
 numerals into actual nonnegative integers to output
-them as a character.
-I don't know how and why it should happen.
+them as a character but a function
+who isn't such numeral was found.
 .It "invalid output format (attempt to apply a number)"
 This error can happen during outputting;
-an attempt to apply something to a number who got converted
+an attempt to apply some argument to a number who got converted
 from the Church number happened;
-I don't know how and why it should happen.
+the number is not a function.
 .El
 .Sh SEE ALSO
 .Lk https://esolangs.org/wiki/Lazy_K
